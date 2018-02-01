@@ -5,6 +5,7 @@
 
 
 # Imports
+import os 
 import pygame
 import random
 
@@ -32,6 +33,13 @@ BLACK = (0, 0, 0)
 GREY = (242, 242, 242)
 C_GREY = (182, 182, 182)
 RAIN = (51, 153, 255)
+
+#Images
+def llama(place):
+    x = place[0]
+    y = place[1]
+    
+    pygame.image.load('llama.png')
 
 def draw_cloud(loc):
     x = loc[0]
@@ -66,6 +74,14 @@ for i in range(num_rain):
     r = random.randrange(1,5)
     drops = [x, y, r, r]
     rain.append(drops)
+
+# The Llama
+stand = []
+for i in range(1):
+    x = (0, 800)
+    y = (400, 600)
+    place = [x, y]
+    stand.append(place)
 
 # Game loop
 done = False
@@ -150,9 +166,6 @@ while not done:
     ''' sky '''
     screen.fill(sky)
 
-    ''' sun and moon '''
-    pygame.draw.ellipse(screen, color, [575, 75, 100, 100])
-
     ''' grass '''
     pygame.draw.rect(screen, grass, [0, 400, 800, 200])
 
@@ -164,6 +177,12 @@ while not done:
                                             [x, y+5]])
     pygame.draw.line(screen, WHITE, [0, 390], [800, 390], 5)
     pygame.draw.line(screen, WHITE, [0, 410], [800, 410], 5)
+
+    '''llama'''
+    
+
+    ''' sun and moon '''
+    pygame.draw.ellipse(screen, color, [575, 75, 100, 100])
 
     ''' rain ''' 
 #    for drops in rain:
