@@ -34,12 +34,10 @@ GREY = (242, 242, 242)
 C_GREY = (182, 182, 182)
 RAIN = (51, 153, 255)
 
+
 #Images
-def llama(place):
-    x = place[0]
-    y = place[1]
-    
-    pygame.image.load('llama.png')
+llama = pygame.image.load('llama.png')
+
 
 def draw_cloud(loc):
     x = loc[0]
@@ -57,7 +55,7 @@ clouds = []
 for i in range(num_clouds):
     x = random.randrange(0, 1600)
     y = random.randrange(-50, 200)
-    s = random.randrange(1, 3)
+    s = random.randrange(1, 2)
     loc = [x, y, s]
     clouds.append(loc)
 
@@ -76,12 +74,21 @@ for i in range(num_rain):
     rain.append(drops)
 
 # The Llama
+num_llama = 4
 stand = []
-for i in range(1):
-    x = (0, 800)
-    y = (400, 600)
-    place = [x, y]
+for i in range(num_llama):
+    x = random.randrange(0, 800)
+    y = random.randrange(400, 500)
+    v = random.randrange(1, 2)
+    place = [x, y, v]
     stand.append(place)
+
+def animal(place):
+    x = place[0]
+    y = place[1]
+
+    screen.blit(llama, (x,y))   
+
 
 # Game loop
 done = False
@@ -120,6 +127,13 @@ while not done:
         if r[1] > 620:
             r[0] = random.randrange(0, 1200)
             r[1] = random.randrange(-50, -1)
+            
+    for s in stand:
+        s[0] += s[2]
+
+        if s[0] > 850:
+            s[0] = random.randrange(-100,-50)
+            s[1] = random.randrange(400, 500)
 
     ''' set sky color '''
     if daytime:
@@ -179,8 +193,9 @@ while not done:
     pygame.draw.line(screen, WHITE, [0, 410], [800, 410], 5)
 
     '''llama'''
-    
-
+    for s in stand:
+        animal(s)
+   
     ''' sun and moon '''
     pygame.draw.ellipse(screen, color, [575, 75, 100, 100])
 
