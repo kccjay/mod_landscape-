@@ -38,7 +38,25 @@ RAIN = (51, 153, 255)
 #Images
 llama = pygame.image.load('llama.png')
 
+# sun/moon
+s_pla = [575, 75]
+s_vel = [0, 0]
+sp = 5
+'''
+def draw_moon(s_pla):
+    x = s_pla[0]
+    y = s_pla[1]
 
+    pygame.draw.ellipse(screen, WHITE, [x, y, 100, 100])
+'''
+
+def draw_sun(s_pla):
+    x = s_pla[0]
+    y = s_pla[1]
+
+    pygame.draw.ellipse(screen, YELLOW, [x, y, 100, 100])
+
+#cloud
 def draw_cloud(loc):
     x = loc[0]
     y = loc[1]
@@ -101,17 +119,15 @@ while not done:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 daytime = not daytime
-            elif event.key == pygame.K_l:
-                lights_on = not lights_on
+            elif event.key == pygame.K_RIGHT:
+                 s_vel[0] = sp
+
             # google 'pygame key constants' for more keys
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            done = True
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RSHIFT:
-                rain = not rain
+
                 
     # Game logic
+    s_pla[0] += s_vel[0]
+    
     ''' move clouds '''
     for c in clouds:
         c[0] -= c[2]
@@ -166,7 +182,7 @@ while not done:
     else:
         fence = D_WHITE
 
-#Toggle Rain 
+    #Toggle Rain 
 
     ''' set window color (if there was a house)'''
     if lights_on:
@@ -197,7 +213,7 @@ while not done:
         animal(s)
    
     ''' sun and moon '''
-    pygame.draw.ellipse(screen, color, [575, 75, 100, 100])
+    draw_sun(s_pla)
 
     ''' rain ''' 
 #    for drops in rain:
