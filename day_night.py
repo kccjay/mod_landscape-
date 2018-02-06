@@ -119,8 +119,18 @@ while not done:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 daytime = not daytime
+            elif event.key == pygame.K_LEFT:
+                 s_vel[0] = -sp
             elif event.key == pygame.K_RIGHT:
                  s_vel[0] = sp
+            elif event.key == pygame.K_UP:
+                 s_vel[1] = -1 * sp
+
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT:
+                 s_vel[0] = 0
+            if event.key == pygame.K_RIGHT:
+                 s_vel[0] = 0
 
             # google 'pygame key constants' for more keys
 
