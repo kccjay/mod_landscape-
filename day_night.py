@@ -13,7 +13,8 @@ import random
 pygame.init()
 
 # Window
-SIZE = (800, 600)
+'''change to 800, 600'''
+SIZE = (900, 600)
 TITLE = "Sunny Day"
 screen = pygame.display.set_mode(SIZE)
 pygame.display.set_caption(TITLE)
@@ -39,7 +40,7 @@ RAIN = (51, 153, 255)
 llama = pygame.image.load('llama.png')
 
 # sun/moon
-s_pla = [575, 75]
+s_pla = [575, 100]
 s_vel = [0, 0]
 sp = 5
 '''
@@ -49,13 +50,6 @@ def draw_moon(s_pla):
 
     pygame.draw.ellipse(screen, WHITE, [x, y, 100, 100])
 '''
-
-def draw_sun(s_pla):
-    x = s_pla[0]
-    y = s_pla[1]
-
-    pygame.draw.ellipse(screen, YELLOW, [x, y, 100, 100])
-
 #cloud
 def draw_cloud(loc):
     x = loc[0]
@@ -105,7 +99,22 @@ def animal(place):
     x = place[0]
     y = place[1]
 
-    screen.blit(llama, (x,y))   
+    screen.blit(llama, (x,y))
+
+#for the sun 
+hack = []
+for i in range(1):
+    s_pla
+    hack.append(s_pla)
+    
+
+def draw_sun(s_pla):
+    x = s_pla[0]
+    y = s_pla[1]
+
+    pygame.draw.ellipse(screen, YELLOW, [x, y, 100, 100])
+
+
 
 
 # Game loop
@@ -117,9 +126,11 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
         elif event.type == pygame.KEYDOWN:
+            '''
             if event.key == pygame.K_SPACE:
                 daytime = not daytime
-            elif event.key == pygame.K_LEFT:
+            '''
+            if event.key == pygame.K_LEFT:
                  s_vel[0] = -sp
             elif event.key == pygame.K_RIGHT:
                  s_vel[0] = sp
@@ -160,6 +171,15 @@ while not done:
         if s[0] > 850:
             s[0] = random.randrange(-100,-50)
             s[1] = random.randrange(400, 500)
+
+    for h in hack:
+        if h[0] > 850:
+            h[0] = (-100)
+            h[1] = (100)
+        elif h[0] < -50:
+            h[0] = (840)
+            h[1] = (100)
+        
 
     ''' set sky color '''
     if daytime:
@@ -212,9 +232,7 @@ while not done:
     ''' fence '''
     y = 380
     for x in range(5, 800, 30):
-        pygame.draw.polygon(screen, WHITE, [[x+5, y], [x+10, y+5],
-                                            [x+10, y+40], [x, y+40],
-                                            [x, y+5]])
+        pygame.draw.polygon(screen, WHITE, [[x+5, y], [x+10, y+5],[x+10, y+40], [x, y+40],[x, y+5]])
     pygame.draw.line(screen, WHITE, [0, 390], [800, 390], 5)
     pygame.draw.line(screen, WHITE, [0, 410], [800, 410], 5)
 
@@ -224,6 +242,7 @@ while not done:
    
     ''' sun and moon '''
     draw_sun(s_pla)
+    
 
     ''' rain ''' 
 #    for drops in rain:
