@@ -138,18 +138,25 @@ while not done:
                  s_vel[0] = sp
             elif event.key == pygame.K_UP:
                  s_vel[1] = -sp
+            elif event.key == pygame.K_DOWN:
+                 s_vel[1] = sp
 
         elif event.type == pygame.KEYUP:
              if event.key == pygame.K_LEFT:
                  s_vel[0] = 0
-             if event.key == pygame.K_RIGHT:
+             elif event.key == pygame.K_RIGHT:
                  s_vel[0] = 0
+             elif event.key == pygame.K_UP:
+                 s_vel[1] = 0
+             elif event.key == pygame.K_DOWN:
+                 s_vel[1] = 0
 
             # google 'pygame key constants' for more keys
 
                 
     # Game logic
     s_pla[0] += s_vel[0]
+    s_pla[1] += s_vel[1]
     
     ''' move clouds '''
     for c in clouds:
@@ -174,17 +181,13 @@ while not done:
             s[0] = random.randrange(-100,-50)
             s[1] = random.randrange(400, 500)
 
-    for h in hack:
-        if h[0] > 850:
-            estella = not estella
-            h[0] = (-100)
-            h[1] = (100)
-            '''
-        elif h[0] < -50:
-            esella = not etella
-            h[0] = (840)
-            h[1] = (100)
-            '''
+    if s_pla[0] > 850:
+        estella = not estella
+        s_pla[0] = (-50)
+    elif s_pla[0] < -75:
+        estella = not estella
+        s_pla[0] = (840)
+        
         
         
 
@@ -233,6 +236,9 @@ while not done:
     ''' sky '''
     screen.fill(sky)
 
+    ''' sun and moon '''
+    draw_sun(s_pla)
+
     ''' grass '''
     pygame.draw.rect(screen, grass, [0, 400, 800, 200])
 
@@ -245,11 +251,7 @@ while not done:
 
     '''llama'''
     for s in stand:
-        animal(s)
-   
-    ''' sun and moon '''
-    draw_sun(s_pla)
-    
+        animal(s)    
 
     ''' rain ''' 
 #    for drops in rain:
