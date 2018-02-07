@@ -88,13 +88,13 @@ for i in range(num_rain):
 
 # The Llama
 num_llama = 4
-stand = []
+herd = []
 for i in range(num_llama):
     x = random.randrange(0, 800)
     y = random.randrange(400, 500)
     v = random.randrange(1, 2)
     place = [x, y, v]
-    stand.append(place)
+    herd.append(place)
 
 def animal(place):
     x = place[0]
@@ -174,12 +174,12 @@ while not done:
             r[0] = random.randrange(0, 1200)
             r[1] = random.randrange(-50, -1)
             
-    for s in stand:
-        s[0] += s[2]
+    for h in herd:
+        h[0] += h[2]
 
-        if s[0] > 850:
-            s[0] = random.randrange(-100,-50)
-            s[1] = random.randrange(400, 500)
+        if h[0] > 850:
+            h[0] = random.randrange(-100,-50)
+            h[1] = random.randrange(400, 500)
 
     if s_pla[0] > 850:
         estella = not estella
@@ -250,8 +250,8 @@ while not done:
     pygame.draw.line(screen, WHITE, [0, 410], [800, 410], 5)
 
     '''llama'''
-    for s in stand:
-        animal(s)    
+    for h in herd:
+        animal(h)    
 
     ''' rain ''' 
 #    for drops in rain:
@@ -268,3 +268,4 @@ while not done:
 
 # Close window on quit
 pygame.quit()
+
