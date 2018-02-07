@@ -14,7 +14,7 @@ pygame.init()
 
 # Window
 '''change to 800, 600'''
-SIZE = (900, 600)
+SIZE = (800, 600)
 TITLE = "Sunny Day"
 screen = pygame.display.set_mode(SIZE)
 pygame.display.set_caption(TITLE)
@@ -75,6 +75,7 @@ daytime = True
 lights_on = False
 rain = True
 
+
 #The rain drops
 num_rain = 500
 rain = []
@@ -113,7 +114,8 @@ def draw_sun(s_pla):
     y = s_pla[1]
 
     pygame.draw.ellipse(screen, YELLOW, [x, y, 100, 100])
-
+    
+estella = True
 
 
 
@@ -135,12 +137,12 @@ while not done:
             elif event.key == pygame.K_RIGHT:
                  s_vel[0] = sp
             elif event.key == pygame.K_UP:
-                 s_vel[1] = -1 * sp
+                 s_vel[1] = -sp
 
         elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT:
+             if event.key == pygame.K_LEFT:
                  s_vel[0] = 0
-            if event.key == pygame.K_RIGHT:
+             if event.key == pygame.K_RIGHT:
                  s_vel[0] = 0
 
             # google 'pygame key constants' for more keys
@@ -174,40 +176,45 @@ while not done:
 
     for h in hack:
         if h[0] > 850:
+            estella = not estella
             h[0] = (-100)
             h[1] = (100)
+            '''
         elif h[0] < -50:
+            esella = not etella
             h[0] = (840)
             h[1] = (100)
+            '''
+        
         
 
     ''' set sky color '''
-    if daytime:
+    if estella:
         sky = BLUE
     else:
         sky = BLACK
 
     '''Set to Moon'''
-    if daytime:
+    if estella:
         color = YELLOW
     else:
         color = GREY
 
     '''Set Clouds'''
-    if daytime:
+    if estella:
         moon = WHITE
 
     else:
         moon = C_GREY
 
     ''' Dark Grass '''
-    if daytime:
+    if estella:
         grass = GREEN
     else:
         grass = D_GREEN
 
     ''' Fence '''
-    if daytime:
+    if estella:
         fence = WHITE
     else:
         fence = D_WHITE
