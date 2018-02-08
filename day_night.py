@@ -88,19 +88,21 @@ for i in range(num_rain):
 
 # The Llama
 num_llama = 4
-herd = []
+stand = []
 for i in range(num_llama):
     x = random.randrange(0, 800)
     y = random.randrange(400, 500)
     v = random.randrange(1, 2)
     place = [x, y, v]
-    herd.append(place)
+    stand.append(place)
 
 def animal(place):
     x = place[0]
     y = place[1]
 
     screen.blit(llama, (x,y))
+
+
 
 #for the sun 
 hack = []
@@ -114,9 +116,10 @@ def draw_sun(s_pla):
     y = s_pla[1]
 
     pygame.draw.ellipse(screen, YELLOW, [x, y, 100, 100])
+
     
 estella = True
-
+droplets = True
 
 
 # Game loop
@@ -128,10 +131,7 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
         elif event.type == pygame.KEYDOWN:
-            '''
-            if event.key == pygame.K_SPACE:
-                daytime = not daytime
-            '''
+
             if event.key == pygame.K_LEFT:
                  s_vel[0] = -sp
             elif event.key == pygame.K_RIGHT:
@@ -140,6 +140,8 @@ while not done:
                  s_vel[1] = -sp
             elif event.key == pygame.K_DOWN:
                  s_vel[1] = sp
+            elif event.key == pygame.K_KP5:
+                 droplets = not droplets
 
         elif event.type == pygame.KEYUP:
              if event.key == pygame.K_LEFT:
@@ -174,12 +176,12 @@ while not done:
             r[0] = random.randrange(0, 1200)
             r[1] = random.randrange(-50, -1)
             
-    for h in herd:
-        h[0] += h[2]
+    for s in stand:
+        s[0] += s[2]
 
-        if h[0] > 850:
-            h[0] = random.randrange(-100,-50)
-            h[1] = random.randrange(400, 500)
+        if s[0] > 850:
+            s[0] = random.randrange(-100,-50)
+            s[1] = random.randrange(400, 500)
 
     if s_pla[0] > 850:
         estella = not estella
@@ -187,10 +189,21 @@ while not done:
     elif s_pla[0] < -75:
         estella = not estella
         s_pla[0] = (840)
+    elif s_pla[1] < -75:
+        estella = not estella
+        s_pla[1] = (450)
+    elif s_pla[1] > 475:
+        estella = not estella
+        s_pla[1] = (-50)
         
         
         
-
+    ''' Sky
+    if droplets = :
+        sky = blue
+    else:
+        sky =
+    '''
     ''' set sky color '''
     if estella:
         sky = BLUE
@@ -222,7 +235,8 @@ while not done:
     else:
         fence = D_WHITE
 
-    #Toggle Rain 
+    #Toggle Rain
+    
 
     ''' set window color (if there was a house)'''
     if lights_on:
@@ -250,12 +264,16 @@ while not done:
     pygame.draw.line(screen, WHITE, [0, 410], [800, 410], 5)
 
     '''llama'''
-    for h in herd:
-        animal(h)    
+    for s in stand:
+        animal(s)    
 
-    ''' rain ''' 
-#    for drops in rain:
-#        pygame.draw.ellipse(screen, RAIN, drops)
+    ''' rain '''
+    if droplets:
+         pass
+    else:
+         for drops in rain:
+            pygame.draw.ellipse(screen, RAIN, drops)
+            
 
     ''' clouds '''
     for c in clouds:
@@ -268,4 +286,3 @@ while not done:
 
 # Close window on quit
 pygame.quit()
-
