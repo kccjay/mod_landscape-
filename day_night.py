@@ -34,6 +34,7 @@ BLACK = (0, 0, 0)
 GREY = (242, 242, 242)
 C_GREY = (182, 182, 182)
 RAIN = (51, 153, 255)
+W_GREY = (191, 191, 191)
 
 
 #Images
@@ -43,13 +44,8 @@ llama = pygame.image.load('llama.png')
 s_pla = [575, 100]
 s_vel = [0, 0]
 sp = 5
-'''
-def draw_moon(s_pla):
-    x = s_pla[0]
-    y = s_pla[1]
 
-    pygame.draw.ellipse(screen, WHITE, [x, y, 100, 100])
-'''
+
 #cloud
 def draw_cloud(loc):
     x = loc[0]
@@ -117,9 +113,17 @@ def draw_sun(s_pla):
 
     pygame.draw.ellipse(screen, YELLOW, [x, y, 100, 100])
 
+def draw_moon(s_pla):
+    x = s_pla[0]
+    y = s_pla[1]
+
+    pygame.draw.ellipse(screen, WHITE, [x, y, 100, 100])
+
     
 estella = True
 droplets = True
+planetary = True
+big_objects = [draw_sun(s_pla), draw_moon(s_pla)]
 
 
 # Game loop
@@ -140,7 +144,7 @@ while not done:
                  s_vel[1] = -sp
             elif event.key == pygame.K_DOWN:
                  s_vel[1] = sp
-            elif event.key == pygame.K_KP5:
+            elif event.key == pygame.K_KP5 or event.key == pygame.K_5:
                  droplets = not droplets
 
         elif event.type == pygame.KEYUP:
@@ -185,30 +189,38 @@ while not done:
 
     if s_pla[0] > 850:
         estella = not estella
+        planetary = not planetary
         s_pla[0] = (-50)
     elif s_pla[0] < -75:
         estella = not estella
+        planetary = not planetary
         s_pla[0] = (840)
     elif s_pla[1] < -75:
         estella = not estella
+        planetary = not planetary
         s_pla[1] = (450)
     elif s_pla[1] > 475:
         estella = not estella
+        planetary = not planetary
         s_pla[1] = (-50)
         
         
         
-    ''' Sky
-    if droplets = :
-        sky = blue
-    else:
-        sky =
-    '''
+   
     ''' set sky color '''
     if estella:
         sky = BLUE
     else:
         sky = BLACK
+
+    ''' Sky
+    if not droplets == estella:
+        sky = BLUE
+    elif droplets == estella:
+        sky = W_GREY
+    elif droplets == estella:
+        sky = BLUE
+    '''
 
     '''Set to Moon'''
     if estella:
@@ -234,8 +246,6 @@ while not done:
         fence = WHITE
     else:
         fence = D_WHITE
-
-    #Toggle Rain
     
 
     ''' set window color (if there was a house)'''
@@ -244,6 +254,11 @@ while not done:
     else:
         window_color = WHITE
 
+    '''Sun to Moon'''
+    if planetary:
+        big_objects[0]
+    else:
+        big_objects[1]
     
         
     # Drawing code
@@ -286,3 +301,4 @@ while not done:
 
 # Close window on quit
 pygame.quit()
+
