@@ -38,16 +38,16 @@ W_GREY = (191, 191, 191)
 
 
 #Images
-llama = pygame.image.load('llama.png')
-bats = pygame.image.load('bat.png')
-turtle = pygame.image.load('turtle.png')
-poke = pygame.image.load('pokeball.png')
-kirby = pygame.image.load('kirby.png')
-twitter = pygame.image.load('twitter.png')
-mario = pygame.image.load('mario.png')
-goku = pygame.image.load('goku.png')
-pac = pygame.image.load('pac1.png')
-c_llama = pygame.image.load('c_llama.png')
+llama = pygame.image.load('images/llama.png')
+bats = pygame.image.load('images/bat.png')
+turtle = pygame.image.load('images/turtle.png')
+poke = pygame.image.load('images/pokeball.png')
+kirby = pygame.image.load('images/kirby.png')
+twitter = pygame.image.load('images/twitter.png')
+mario = pygame.image.load('images/mario.png')
+goku = pygame.image.load('images/goku.png')
+pac = pygame.image.load('images/pac1.png')
+c_llama = pygame.image.load('images/c_llama.png')
 
 
 # sun/moon
@@ -87,22 +87,6 @@ daytime = True
 lights_on = False
 rain = True
 
-num_c_llama = 2
-llamas = []
-for i in range(num_c_llama):
-    x = random.randrange(0, 1600)
-    y = random.randrange(-50, 200)
-    s = random.randrange(1, 3)
-    loc = [x, y, s]
-    llamas.append(loc)
-
-def cloud_llama(loc):
-    x = loc[0]
-    y = loc[1]
-
-    screen.blit(c_llama(x, y))
-    
-
 
 #The rain drops
 num_rain = 1000
@@ -135,8 +119,7 @@ l_herd = []
 for i in range(num_llama):
     x = random.randrange(0, 800)
     y = random.randrange(400, 500)
-    v = random.randrange(1, 3)
-    place = [x, y, v]
+    place = [x, y]
     l_herd.append(place)
 
 def animal(place):
@@ -144,18 +127,8 @@ def animal(place):
     y = place[1]
 
     screen.blit(llama, (x, y))
-
-
-
-#for the sun
-    '''
-sol = []
-for i in range(1):
-    s_pla
-    sol.append(s_pla)
-    '''
-    
-
+  
+#Only for the sun and the moon
 def draw_sun(s_pla):
     x = s_pla[0]
     y = s_pla[1]
@@ -168,7 +141,7 @@ def draw_moon(s_pla):
 
     pygame.draw.ellipse(screen, GREY, [x, y, 100, 100])
 
-#the turtles
+#The Turtles
 num_turtle = 3
 bale = []
 for i in range(num_turtle):
@@ -184,6 +157,8 @@ def tturtle(loc):
     screen.blit(turtle, (x, y))
 
 
+#The controlable characters
+#appear from the left of the screen
 def player(p_pla):
     x = p_pla[0]
     y = p_pla[1]
@@ -191,7 +166,6 @@ def player(p_pla):
     screen.blit(switch, (x, y))
 
 #Ghost
-#num_pac = 1
 ghosts = []
 for i in range(1):
     x = random.randrange(810, 850)
@@ -208,7 +182,7 @@ def ghost(loc):
 
 
 
-    
+#Variables needed inside the loop
 estella = True
 droplets = True
 planetary = True
@@ -216,6 +190,7 @@ bbbats = True
 appear = True 
 p2p = 1
 number = 25
+s_llama = 2
 
 # Game loop
 done = False
@@ -226,7 +201,6 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
         elif event.type == pygame.KEYDOWN:
-
             if event.key == pygame.K_LEFT:
                  s_vel[0] = -sp
             elif event.key == pygame.K_RIGHT:
@@ -253,10 +227,13 @@ while not done:
                  p2p = p2p + 1
             elif event.key == pygame.K_RCTRL:
                  p2p = p2p - 1
+            elif event.key == pygame.K_KP_MINUS:
+                 s_llama = s_llama - 1
+            elif event.key == pygame.K_KP_PLUS:
+                 s_llama = s_llama + 1
+            elif event.key == pygame.K_KP_ENTER:
+                 s_llama = 0
                  
-            
-            
-
         elif event.type == pygame.KEYUP:
              if event.key == pygame.K_LEFT:
                  s_vel[0] = 0
@@ -274,7 +251,6 @@ while not done:
                   p_vel[0] = 0
              elif event.key == pygame.K_s:
                  p_vel[1] = 0
-
             # google 'pygame key constants' for more keys
 
          
@@ -292,16 +268,8 @@ while not done:
         if c[0] < -100:
             c[0] = random.randrange(800, 1600)
             c[1] = random.randrange(-50, 200)
-
-    # a cloud llama
-    for l in llamas:
-        l[0] -= l[2]
-
-        if l[0] < -100:
-            l[0] = random.randrange(800, 1600)
-            l[1] = random.randrange(-50, 200)
             
-    #rain
+    #The rain "5"
     for r in rain:
         r[0] -= 1
         r[1] += 7
@@ -312,16 +280,12 @@ while not done:
 
     #llamas
     for l in l_herd:
-        l[0] += l[2]
+        l[0] += s_llama
 
         if l[0] > 850:
             l[0] = random.randrange(-75,-50)
             l[1] = random.randrange(400, 500)
-            '''
-        if l[0] < -49:
-            l[0] = random.randrange(825, 845)
-            l[1] = random.randrange(400, 500)
-            '''
+            
     #bats
     for c in colony:
         if c[1] or c[0]:
@@ -334,16 +298,6 @@ while not done:
         if g[0] < -75:
             g[0] = random.randrange(900, 1000)
             g[1] = random.randrange(0, 600)
-
-    #turtles
-            '''
-    for b in bale:
-        b[0] -= 1
-
-        if b[0] > -10:
-            b[0] = random.randrange(800, 850)
-            b[1] = random.randrange(450, 510)
-            '''
             
 
     if s_pla[0] > 850:
@@ -375,10 +329,11 @@ while not done:
         p_pla[1] = (599)
     '''
 
+    #For the player characters
     if p2p == 1:
         switch = llama
     elif p2p == 2:
-        switch = twitter
+        switch = c_llama
     elif p2p == 3:
         switch = turtle
     elif p2p == 4:
@@ -434,11 +389,6 @@ while not done:
         window_color = YELLOW
     else:
         window_color = WHITE
-
-    '''Sun to Moon'''
-    '''
-    draw_sun(s_pla)
-    '''
         
     # Drawing code
     ''' sky '''
@@ -489,18 +439,13 @@ while not done:
     else:
         for g in ghosts:
             ghost(g)
-        
-
+    
     ''' rain '''
     if droplets:
          pass
     else:
          for drops in rain:
             pygame.draw.ellipse(screen, RAIN, drops)
-            
-    '''llama cloud'''
-    for l in llamas:
-        draw_cloud(l)
     
     ''' clouds '''
     for c in clouds:

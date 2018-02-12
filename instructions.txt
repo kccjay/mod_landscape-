@@ -1,0 +1,8 @@
+1. The arrows on the keyborad control the sun
+2. The keyboard "5" turns on and off the rain
+3. "F1" makes bats appear
+4. pressing the left "Ctrl" brings about a llama from the left side of the screen
+5. Using the keyboard gaming moving keys (w,a,s,d) moves the llama
+6. Pressing right "Alt" switches the characters 
+7. Pressing the right "Ctrl" brings you back to the precious characters
+8. The keypad "+"
