@@ -5,4 +5,6 @@
 5. Using the keyboard gaming moving keys (w,a,s,d) moves the llama
 6. Pressing right "Alt" switches the characters 
 7. Pressing the right "Ctrl" brings you back to the precious characters
-8. The keypad "+"
+8. The keypad "+" increases the speed for the llamas 
+9. The keypad "-" decreases the speed for the llamas 
+10. The keypad ENTER puts the speed at 0 
