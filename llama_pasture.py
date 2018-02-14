@@ -250,6 +250,8 @@ while not done:
                  s_llama = 0
             elif event.key == pygame.K_SPACE:
                  white_s = not white_s
+            elif event.key == pygame.K_KP5 or event.key == pygame.K_5:
+                droplets = not droplets
 
                              
         elif event.type == pygame.KEYUP:
